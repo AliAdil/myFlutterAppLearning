@@ -11,9 +11,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'My Flutter App',
-     /* home: VideoPlayerScreen(),*/
+      home: VideoPlayerScreen(),
     /*  home:MyStatefulWidget(), */
-      home: BasicAppBarSample(),
+/*      home: BasicAppBarSample(),*/
 
 
 
@@ -132,7 +132,7 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
     // offers several different constructors to play videos from assets, files,
     // or the internet.
     _controller = VideoPlayerController.network(
-      'http://apidms112.radiantworkforce.com/videomanager/api/runVd/BigBuckBunny/mp4',
+      'http://209.58.146.41:8082',
     );
 
     // Initialize the controller and store the Future for later use.
