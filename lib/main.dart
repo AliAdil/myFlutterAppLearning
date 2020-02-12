@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 import 'MyMainWidget.dart';
@@ -11,12 +12,91 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'My Flutter App',
-      home: VideoPlayerScreen(),
-    /*  home:MyStatefulWidget(), */
+      /* home: VideoPlayerScreen(),*/
+      home: FirstRoute(),
+      /*  home:MyStatefulWidget(), */
 /*      home: BasicAppBarSample(),*/
+    );
+  }
+}
 
+class FirstRoute extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('My Main'),
+      ),
+      body: Center(
+        child: MyButtons(),
+      ),
+    );
+  }
+}
 
+class MyButtons extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+        RaisedButton(
+          child: Text('Open Route'),
+          onPressed: () {
+            // Navigate to second route when tapped.
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => SecondRoute()));
+          },
+        ),
+        RaisedButton(
+          child: Text('Open Video Player'),
+          onPressed: () {
+            // Navigate to second route when tapped.
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => VideoPlayerScreen()));
+          },
+        ),
+        RaisedButton(
+          child: Text('App Bar With Buttons'),
+          onPressed: () {
+            // Navigate to second route when tapped.
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => BasicAppBarSample()));
+          },
+        ),
+      ],
+    );
+  }
+}
 
+class SecondRoute extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Second Route"),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+             RaisedButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: Text('Go Back!'),
+            ),
+            RaisedButton(
+              onPressed: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => MyMainWidget()));
+              },
+              child: Text('My Custom Testing'),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
@@ -111,15 +191,11 @@ class _MyHomePageState extends State<MyHomePage> {
 }
 */
 
-
 class VideoPlayerScreen extends StatefulWidget {
   VideoPlayerScreen({Key key}) : super(key: key);
 
   @override
   _VideoPlayerScreenState createState() => _VideoPlayerScreenState();
-
-
-
 }
 
 class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
@@ -132,7 +208,7 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
     // offers several different constructors to play videos from assets, files,
     // or the internet.
     _controller = VideoPlayerController.network(
-      'http://209.58.146.41:8082',
+      'http://techslides.com/demos/sample-videos/small.mp4',
     );
 
     // Initialize the controller and store the Future for later use.
@@ -201,9 +277,6 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
   }
 }
 
-
-
-
 class MyStatefulWidget extends StatefulWidget {
   MyStatefulWidget({Key key}) : super(key: key);
 
@@ -220,17 +293,20 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
       appBar: AppBar(
         title: const Text('Sample Code'),
         backgroundColor: Colors.purple,
-        toolbarOpacity: 0.5 ,
+        toolbarOpacity: 0.5,
         elevation: 10,
         centerTitle: true,
       ),
-      body: Center(child: Text('You have pressed the button $_count times.' ,style: TextStyle(fontSize: 50),)),
+      body: Center(
+          child: Text(
+        'You have pressed the button $_count times.',
+        style: TextStyle(fontSize: 50),
+      )),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.red,
         onPressed: () => setState(() => _count++),
         tooltip: 'Increment Counter',
-        child: const Icon(Icons.security,color:Colors.orange),
-
+        child: const Icon(Icons.security, color: Colors.orange),
       ),
     );
   }
