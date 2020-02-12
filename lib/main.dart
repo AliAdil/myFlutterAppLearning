@@ -94,6 +94,13 @@ class SecondRoute extends StatelessWidget {
               },
               child: Text('My Custom Testing'),
             ),
+            RaisedButton(
+              onPressed: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => MyMainWidget()));
+              },
+              child: Text('Inherited Widget'),
+            ),
           ],
         ),
       ),
@@ -101,6 +108,22 @@ class SecondRoute extends StatelessWidget {
   }
 }
 
+class InheritedValue extends InheritedWidget{
+  final Image asset;
+
+  InheritedValue({this.asset,Widget child}) : super(child:child);
+  @override
+  bool updateShouldNotify(InheritedWidget oldWidget) => true;
+
+}
+
+class MyWidget extends StatelessWidget{
+  @override
+  Widget build(BuildContext context) {
+    final car = context.dependOnInheritedWidgetOfExactType();
+  }
+
+}
 /*
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
